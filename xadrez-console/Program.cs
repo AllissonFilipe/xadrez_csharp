@@ -14,13 +14,31 @@ namespace xadrez_console
         {
             try
             {
-                Tabuleiro tab = new Tabuleiro(8, 8);
 
+                PartidaDeXadrez partida = new PartidaDeXadrez();
+                
+                while(!partida.terminada)
+                {
+                    Console.Clear();
+                    Tela.imprimirTabuleiro(partida.tab);
+                    Console.WriteLine();
+                    Console.Write("Origem: ");
+                    Posicao origem = Tela.lerPosicaoXadrez().toPosicao();
+                    Console.Write("Destino: ");
+                    Posicao destino = Tela.lerPosicaoXadrez().toPosicao();
+
+                    partida.executaMovimento(origem, destino);
+                }
+                
+
+
+
+                /*
                 tab.colocarPeca(new Torre(Cor.Preta, tab), new Posicao(0, 0));
                 tab.colocarPeca(new Torre(Cor.Preta, tab), new Posicao(1, 3));
                 tab.colocarPeca(new Rei(Cor.Branca, tab), new Posicao(0, 2));
 
-                Tela.imprimirTabuleiro(tab);
+                Tela.imprimirTabuleiro(tab);*/
 
                 /*PosicaoXadrez pos = new PosicaoXadrez('c', 7);
                 Console.WriteLine(pos);
@@ -30,6 +48,8 @@ namespace xadrez_console
             {
                 Console.WriteLine(e.Message);
             }
+
+            Console.WriteLine();
             
         }
     }
