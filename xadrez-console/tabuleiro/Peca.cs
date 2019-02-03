@@ -8,16 +8,17 @@ namespace xadrez_console.tabuleiro
 {
     abstract class Peca
     {
-        public Posicao posicao { get; set; }
-        public Cor cor { get; set; }
-        public int qteMovimentos { get; set; }
-        public Tabuleiro tab { get; set; }
 
-        public Peca(Cor cor, Tabuleiro tab)
+        public Posicao posicao { get; set; }
+        public Cor cor { get; protected set; }
+        public int qteMovimentos { get; protected set; }
+        public Tabuleiro tab { get; protected set; }
+
+        public Peca(Tabuleiro tab, Cor cor)
         {
             this.posicao = null;
-            this.cor = cor;
             this.tab = tab;
+            this.cor = cor;
             this.qteMovimentos = 0;
         }
 
@@ -34,11 +35,11 @@ namespace xadrez_console.tabuleiro
         public bool existeMovimentosPossiveis()
         {
             bool[,] mat = movimentosPossiveis();
-            for(int i = 0; i<tab.linhas; i++)
+            for (int i = 0; i < tab.linhas; i++)
             {
-                for(int j = 0; j<tab.colunas; j++)
+                for (int j = 0; j < tab.colunas; j++)
                 {
-                    if(mat[i, j])
+                    if (mat[i, j])
                     {
                         return true;
                     }
@@ -47,7 +48,7 @@ namespace xadrez_console.tabuleiro
             return false;
         }
 
-        public bool podeMoverPara(Posicao pos)
+        public bool movimentoPossivel(Posicao pos)
         {
             return movimentosPossiveis()[pos.linha, pos.coluna];
         }
